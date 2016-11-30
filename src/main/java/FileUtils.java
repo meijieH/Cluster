@@ -20,7 +20,7 @@ public class FileUtils {
             String thisRow;
             while ((thisRow = bf.readLine()) != null) {
                 String[] slices = thisRow.split(",");
-                NodeK node=new NodeK(Integer.valueOf(slices[1]),Integer.valueOf(slices[2]),-1,-1);
+                NodeK node=new NodeK(Double.valueOf(slices[1]),Double.valueOf(slices[2]),-1,-1);
                 data.put(Integer.valueOf(slices[0]),node);
             }
             return data;
