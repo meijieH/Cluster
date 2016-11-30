@@ -31,9 +31,10 @@ public class KMedoids {
 			} else
 				i--;
 		}
-		key[0]=4;
-		key[1]=6;
-		System.out.println(key[0]+"　"+key[1]);
+		/*
+		 * key[0]=4; key[1]=6;
+		 */
+		System.out.println(key[0] + "　" + key[1]);
 	}
 
 	/* 根据中心点分簇 */
@@ -47,8 +48,8 @@ public class KMedoids {
 			Double in = dis[0];
 			for (int j = 0; j < k; j++) {
 				if (in > dis[j]) {
-					in=dis[j];
-					index =j;
+					in = dis[j];
+					index = j;
 				}
 			}
 			data.get(i).label = key[index];
@@ -65,11 +66,11 @@ public class KMedoids {
 			Double in = dis[0];
 			for (int j = 0; j < k; j++) {
 				if (in > dis[j]) {
-					in=dis[j];
-					index =j;
+					in = dis[j];
+					index = j;
 				}
 			}
-			data.get(i).label = key[index];
+			data.get(i).label2 = key[index];
 		}
 	}
 
@@ -81,8 +82,8 @@ public class KMedoids {
 		Double t1 = 1.0;
 		Double t2 = 1.0;
 		for (int i = 0; i < k; i++) {
-			t1 *= (n1.attr1-n2.attr1);
-			t2 *= (n1.attr2-n2.attr2);
+			t1 *= (n1.attr1 - n2.attr1);
+			t2 *= (n1.attr2 - n2.attr2);
 		}
 		dis = Math.pow((t1 + t2), 1.0 / k);
 		return dis;
@@ -104,8 +105,9 @@ public class KMedoids {
 		} else {
 			if (data.get(Integer.valueOf(j)).label2 != data.get(Integer.valueOf(h)).label2)
 				return 0.0;
-			else
+			else {
 				return getMks(h, j) - getMks(temp, j);
+			}
 
 		}
 
@@ -121,24 +123,26 @@ public class KMedoids {
 	}
 
 	/*
-	 * 不断反复换中心点分簇 1.任意选择k个对象作为初始的簇中心点； 2.指派每个剩余的对象给离它最近的中心点所代表的簇； 3.
-	 * while(！簇分配不再变化) for each 中心点 for each 非中心点 非中心点替换中心点,得到代价
+	 * 不断反复换中心点分簇 1.任意选择k个对象作为初始的簇中心点； 2.指派每个剩余的对象给离它最近的中心点所代表的簇；
+	 * 3.while(！簇分配不再变化) for each 中心点 for each 非中心点 非中心点替换中心点,得到代价
 	 * 得到代价List，如果有负数，找出其中最小的，替换中心点，更新中心点集、dis1
 	 */
 	static void AllCluster() throws IOException {
 		readData();
 		initKey();
 		Cluster();
-		while (still()) {
-			for (int i : key) {// 每个中心点
+		while (!still()) {
+			for (int ii = 0; ii < k; ii++) {// 每个中心点
 				HashMap<Integer, Double> pay = new HashMap();
+				int i = key[ii];
 				for (Integer j : data.keySet()) {// 每个非中心点
 
-					// 辅助观察
+					/*//辅助观察
 					for (Integer f : data.keySet()) {
 						System.out.print(data.get(f).label + " ");
 					}
 					System.out.println();
+					*/
 
 					// 假设替换
 					for (int m = 0; m < k; m++) {
@@ -160,7 +164,7 @@ public class KMedoids {
 					}
 				}
 				if (min < 0) {
-					key[i] = index;
+					key[ii] = index;
 					// Cluster();
 					for (Integer l : data.keySet())
 						data.get(l).label = data.get(l).label2;
@@ -188,11 +192,11 @@ public class KMedoids {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		for(int i=0;i<k;i++){
+		for (int i = 0; i < k; i++) {
 			System.out.print("{");
 			for (Integer j : data.keySet()) {
-				if(data.get(j).label==key[i]){
-					System.out.print(j+",");
+				if (data.get(j).label == key2[i]) {
+					System.out.print(j + ",");
 				}
 			}
 			System.out.println("}");
