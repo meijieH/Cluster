@@ -12,6 +12,9 @@ class NodeK {
 		this.label = label;
 		this.label2 = label2;
 	}
+	public String toString(){
+		return "("+attr1+","+attr2+","+label+")";
+	}
 
 	
 
