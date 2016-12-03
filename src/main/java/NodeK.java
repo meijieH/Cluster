@@ -1,3 +1,4 @@
+// todo 在Java里,成员变量都写成private的,不要直接暴露出来
 class NodeK {
     final static int INVALID_LABEL = -1;
     // todo 命名太随意了

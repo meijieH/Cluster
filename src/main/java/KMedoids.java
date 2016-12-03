@@ -157,7 +157,9 @@ public class KMedoids {
         readData();
         initKey();
         Cluster();
+        // todo still的逻辑本身就很绕,这里又取了"非"...
         while (!still()) {
+            // todo 不要命这种ii的变量名。。。容易少写写成i。。。
             for (int ii = 0; ii < k; ii++) {// 每个中心点
                 HashMap<Integer, Double> pay = new HashMap();
                 int i = key[ii];
@@ -183,6 +185,7 @@ public class KMedoids {
                 }
                 int index = 0;
                 Double min = Double.MAX_VALUE;
+                // todo 禁止用l做变量名。。。
                 for (Integer l : pay.keySet()) {
                     if (min > pay.get(l)) {
                         min = pay.get(l);

@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.util.HashMap;
 
+// todo 可以考虑kmean和kmedoids的共性,提出一个基类来共享一些代码~
+
 public class KMeans {
 
     static int k; // k个簇
@@ -151,7 +153,6 @@ public class KMeans {
         try {
             AllCluster();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         for (int i = 0; i < k; i++) {
